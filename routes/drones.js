@@ -52,7 +52,21 @@ router.get('/drones/:id/edit', (req, res, next) => {
 
 router.post('/drones/:id/edit', (req, res, next) => {
   // Iteration #4: Update the drone
-  // ... your code here
+  let id = req.params.id
+  const {droneName, dronePropellers, droneSpeed} = req.body
+  
+  let editedDrone = {
+    name: droneName,
+    propellers: dronePropellers,
+    maxSpeed: droneSpeed
+  }
+  DroneModel.findByIdAndUpdate(id, editedDrone)
+  .then(() => {
+    res.redirect('/drones')
+  })
+  .catch(() => {
+    console.log('Edit.failed')
+  })
 });
 
 router.post('/drones/:id/delete', (req, res, next) => {
