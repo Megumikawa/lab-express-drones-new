@@ -8,6 +8,7 @@ router.get('/drones', (req, res, next) => {
   // Iteration #2: List the drones
   DroneModel.find()
     .then((drones) => {
+      console.log(drones)
       res.render('drones/list.hbs',{drones})
     })
     .catch(() => {
@@ -30,11 +31,12 @@ router.post('/drones/create', (req, res, next) => {
   }
   DroneModel.create(myNewDrone)
   .then(() => {
+    console.log('create drones is success')
     res.redirect('/drones')
   })
-  .catch(() => {
-    console.log(error)
-    res.render('drones/create-form.hbs')
+  .catch((error) => {
+    console.log('create drones error', error)
+    res.render('/drones/create-form.hbs')
   })
 });
 
@@ -43,7 +45,7 @@ router.get('/drones/:id/edit', (req, res, next) => {
   let id = req.params.id
   DroneModel.findById(id)
   .then((drones) => {
-    res.render('update-form.hbs', {drones})
+    res.render('drones/update-form.hbs', {drones})
   })
   .catch(() => {
     console.log('Something went wrong while getting a drone')
@@ -65,7 +67,7 @@ router.post('/drones/:id/edit', (req, res, next) => {
     res.redirect('/drones')
   })
   .catch(() => {
-    console.log('Edit.failed')
+    console.log('Edit failed')
   })
 });
 
