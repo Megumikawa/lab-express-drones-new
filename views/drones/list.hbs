@@ -5,5 +5,10 @@
   <p>Propellers:{{this.propellers}}</p> 
   <p>Speed:{{this.maxSpeed}}</p>
 </div>
-<a href="/drones/{{this._id}}/edit">Edit</a>
+<div>
+  <a href="/drones/{{this._id}}/edit"><button>Edit</button></a>
+  <form method="POST" action="/drones/{{this._id}}/delete">
+    <button>Delete</button>
+  </form>
+</div>
 {{/each}}
