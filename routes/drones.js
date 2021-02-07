@@ -40,7 +40,14 @@ router.post('/drones/create', (req, res, next) => {
 
 router.get('/drones/:id/edit', (req, res, next) => {
   // Iteration #4: Update the drone
-  // ... your code here
+  let id = req.params.id
+  DroneModel.findById(id)
+  .then((drones) => {
+    res.render('update-form.hbs', {drones})
+  })
+  .catch(() => {
+    console.log('Something went wrong while getting a drone')
+  })
 });
 
 router.post('/drones/:id/edit', (req, res, next) => {
